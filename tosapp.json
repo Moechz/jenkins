@@ -1,0 +1,96 @@
+{
+  "app_id": "jenkinsdocker",
+  "title": "Official Jenkins Docker image",
+  "image": "jenkins/jenkins:2.541.3-lts-jdk17",
+  "repo_name": "jenkins",
+  "mode": "plain",
+  "container_port": 8080,
+  "category": [
+    "Development_Tools"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/jenkinsdocker/var_jenkins_home",
+      "container": "/var/jenkins_home"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "jenkinsci",
+  "upstream_url": "https://github.com/jenkinsci/docker",
+  "upstream_license": "MIT",
+  "descript": "The Jenkins Continuous Integration and Delivery server. Packaged for TerraMaster TOS 7: the official Docker Hub image runs as a container on your NAS, keeps its data in the application data folder (so it survives restarts and updates), and is opened from its desktop icon.",
+  "release_note": "1. First release.",
+  "important": "First run: open the web UI and complete the initial setup. Data lives in /Volume1/DockerAppData/jenkinsdocker/ and survives restarts and updates. The container runs as uid 1000, so mounted folders must be readable by that user. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the application data folder before uninstalling with data removal. Plain HTTP on the LAN.",
+  "probe": {
+    "user_in_image": "jenkins",
+    "entrypoint": [
+      "/usr/bin/tini",
+      "--",
+      "/usr/local/bin/jenkins.sh"
+    ],
+    "cmd": null,
+    "exposed_ports": [
+      8080,
+      50000
+    ],
+    "declared_volumes": [
+      "/var/jenkins_home"
+    ],
+    "image_healthcheck": [],
+    "digest": "jenkins/jenkins@sha256:cce1eeb79902722f3cf7a8831c41e95c39f4a42b9a2981959630cc66539b3c2d",
+    "architecture": "x86_64",
+    "platforms": [],
+    "http_client_in_image": "curl",
+    "trial_run": {
+      "ok": true,
+      "http_code": "503",
+      "state": "running",
+      "paths": [],
+      "host_port": 18000,
+      "log_tail": "rt: Started oejs.ServerConnector@651578bf{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}\n2026-11-10 15:49:23.559+0000 [id=1]\tINFO\torg.eclipse.jetty.server.Server#doStart: Started oejs.Server@3ed03652{STARTING}[12.1.5,sto=0] @1848ms\n2026-11-10 15:49:23.561+0000 [id=26]\tINFO\twinstone.Logger#logInternal: Winstone Servlet Engine running: controlPort=disabled\n2026-11-10 15:49:23.889+0000 [id=25]\tINFO\tjenkins.model.Jenkins#<init>: Starting version 2.541.3\n2026-11-10 15:49:24.148+0000 [id=34]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Started initialization\n2026-11-10 15:49:24.191+0000 [id=41]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Listed all plugins\n2026-11-10 15:49:26.076+0000 [id=47]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Prepared all plugins\n2026-11-10 15:49:26.093+0000 [id=47]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Started all plugins\n2026-11-10 15:49:26.095+0000 [id=36]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Augmented all extensions\n2026-11-10 15:49:26.487+0000 [id=36]\tINFO\tjenkins.InitReactorRunner$1#onAttained: System config loaded\n2026-11-10 15:49:26.489+0000 [id=33]\tINFO\tjenkins.InitReactorRunner$1#onAttained: System config adapted\n2026-11-10 15:49:26.490+0000 [id=32]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Loaded all jobs\n2026-11-10 15:49:26.494+0000 [id=36]\tINFO\tjenkins.InitReactorRunner$1#onAttained: Configuration for all jobs updated\n2026-11-10 15:49:26.564+0000 [id=61]\tINFO\thudson.util.Retrier#start: Attempt #1 to do the action check updates server",
+      "files_in_mounts": "/tmp/tosdocker-trial-1794325757/var_jenkins_home/config.xml\n/tmp/tosdocker-trial-1794325757/var_jenkins_home/users/admin_2ae08790512903a7de28b0c89d407e94cfc6e5232b55020381d49139a932bf6a/config.xml\n/tmp/tosdocker-trial-1794325757/var_jenkins_home/nodeMonitors.xml\n/tmp/tosdocker-trial-1794325757/var_jenkins_home/userContent/readme.txt\n/tmp/tosdocker-trial-1794325757/var_jenkins_home/jenkins.telemetry.Correlator.xml"
+    },
+    "docker_hub": {},
+    "github": {
+      "owner": "jenkinsci",
+      "repo": "docker",
+      "description": "Docker official jenkins repo",
+      "license": "MIT",
+      "homepage": "https://hub.docker.com/r/jenkins/jenkins"
+    }
+  },
+  "healthcheck": [
+    "CMD-SHELL",
+    "curl -s -o /dev/null http://127.0.0.1:8080/ || exit 1"
+  ],
+  "platform": "x86_64",
+  "user": "1000:1000",
+  "publisher": "Moechz",
+  "compose_project": "jenkinsdocker",
+  "github_repo": "jenkins",
+  "upstream_version": "2.541.3",
+  "release_tag_prefix": "v",
+  "version": "2.541.3-1",
+  "help": "https://github.com/Moechz/jenkins/issues",
+  "official": "https://github.com/jenkinsci/docker",
+  "license": "MIT",
+  "docker_socket": false,
+  "group_add": [],
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "translations": {
+    "zh-cn": {
+      "descript": "持续集成/持续交付服务器，支持流水线与插件。",
+      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/jenkinsdocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+    },
+    "zh-hk": {
+      "descript": "持续集成/持续交付服务器，支持流水线与插件。",
+      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/jenkinsdocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+    }
+  },
+  "host_port": 8051
+}
