@@ -249,7 +249,8 @@ normal for a self-hosted CI server but must be covered by your own controls.
 
 The destinations in section 4 have their own privacy policies. Relevant links:
 
-- Jenkins project: <https://www.jenkins.io/privacy/>
+- Jenkins usage-statistics advisory: <https://www.jenkins.io/blog/2016/03/30/usage-statistics-privacy-advisory/>
+- Jenkins security: <https://www.jenkins.io/security/>
 - Docker: <https://www.docker.com/legal/privacy/>
 - Google: <https://policies.google.com/privacy>
 - Your SCM, registry, cloud, chat and identity providers: see the provider's
