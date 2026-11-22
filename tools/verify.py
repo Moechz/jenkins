@@ -69,8 +69,11 @@ for field in ("id", "icon", "publisher", "exec", "version", "low_version", "cate
               "depend", "platform", "application_type", "user", "all_user_display",
               "allow_open_in_mobile", "path", "open_path", "name"):
     chk(field in cfg, f"required config.ini field missing: {field}")
-m = re.fullmatch(r"http://\$\{ip\}:(\d+)", cfg["path"])
-chk(m is not None, "path must be http://${ip}:<port> (Docker app URL form)")
+# The app may open a sub-path (Jenkins needs /login: / returns 403 before
+# login). Keep the scheme/port rule and allow one optional path segment.
+m = re.fullmatch(r"http://\$\{ip\}:(\d+)(/[A-Za-z0-9._~!&'()*+,;=:@%/-]*)?",
+                 cfg["path"])
+chk(m is not None, "path must be http://${ip}:<port>[/path] (Docker app URL form)")
 cfg_port = int(m.group(1)) if m else 0
 chk(cfg_port == int(spec["host_port"]),
     f"config.ini path port {cfg_port} != spec host_port {spec['host_port']}")

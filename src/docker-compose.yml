@@ -1,7 +1,7 @@
 # ===========================================================================
 # Official Jenkins Docker image for TerraMaster TOS 7 (Docker application)
 # ===========================================================================
-# Upstream image : jenkins/jenkins:2.541.3-lts-jdk17 (Docker Hub, used unmodified)
+# Upstream image : jenkins/jenkins:2.580.2-lts-jdk21 (Docker Hub, used unmodified)
 #                  -> https://github.com/jenkinsci/docker
 #
 # Ports   : host 8051 -> container 8080. The host port is in the
@@ -26,7 +26,7 @@
 
 services:
   jenkinsdocker:
-    image: jenkins/jenkins:2.541.3-lts-jdk17
+    image: jenkins/jenkins:2.580.2-lts-jdk21
     container_name: jenkinsdocker
     restart: unless-stopped
     user: "1000:1000"
@@ -34,14 +34,19 @@ services:
       - "8051:8080"
     environment:
       TZ: "Asia/Shanghai"
+      # Upstream Jenkins enables anonymous usage statistics by default and
+      # sends telemetry trials to uplink.jenkins.io. Both are off in this
+      # package; the same property is documented in PRIVACY.md and verified
+      # at startup (hudson.model.UsageStatistics.DISABLED == true).
+      JAVA_OPTS: "-Dhudson.model.UsageStatistics.disabled=true"
     volumes:
       - /Volume1/DockerAppData/jenkinsdocker/var_jenkins_home:/var/jenkins_home
     healthcheck:
-      test: ["CMD-SHELL", "curl -s -o /dev/null http://127.0.0.1:8080/ || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS -o /dev/null http://127.0.0.1:8080/login || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 30s
+      start_period: 60s
 
 # TOS App Center web metadata (must be the last block of the file):
 # web.port is the published host port above, protocol is http.

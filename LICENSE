@@ -25,7 +25,7 @@ Third-party notices
 
 Official Jenkins Docker image is Copyright its upstream authors and is distributed under
 MIT. This repository only packages the
-official container image `jenkins/jenkins:2.541.3-lts-jdk17` from Docker Hub unmodified; no
+official container image `jenkins/jenkins:2.580.2-lts-jdk21` from Docker Hub unmodified; no
 upstream source code is distributed here. All trademarks belong to their owners.
 This is an independent community package, not affiliated with the upstream
 project or TerraMaster.
