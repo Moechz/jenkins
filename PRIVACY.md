@@ -124,6 +124,13 @@ feature.
 | `plugins.jenkins.io`, `www.jenkins.io`, `stats.jenkins.io` | Only when a user clicks a documentation, plugin or statistics link in the UI. | Normal browser request for the page; no app data. | Jenkins project websites (global CDN). | Nothing is sent automatically; links can be blocked at the browser/proxy. |
 | Your own job and plugin destinations — for example GitHub/GitLab/Bitbucket, Maven Central, npm/PyPI, container registries, S3/Azure/GCS, Kubernetes, SSH hosts, Slack/Teams/Discord/webhooks, SMTP servers, LDAP/AD/OIDC/SAML providers, artifact repositories and cloud APIs | When a job runs, when a plugin is configured to do so, or when a user signs in through an external identity provider. | Whatever the job or plugin is configured to send: source code, commit metadata, dependency requests, build artifacts, logs, environment variables, credentials, notification text, account attributes. This is the main data flow of a CI server and is entirely under your control. | Wherever you configure it; the provider's region applies. | Review every job and plugin; use least-privilege credentials; restrict egress with a firewall or proxy; disable unused plugins; keep secrets in Jenkins credentials rather than job scripts. |
 
+### Note on `up.jenkins.io`
+
+Some review templates mention `up.jenkins.io`. That hostname does not resolve
+and is **not** contacted by Jenkins 2.580.2. The update centre is
+`updates.jenkins.io` (and its mirrors/CDN), and trial telemetry is
+`uplink.jenkins.io`. Both are listed in the table above.
+
 ### Jenkins update centre and the Google connectivity check
 
 The default update site is `https://updates.jenkins.io/update-center.json`, which
