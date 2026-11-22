@@ -177,6 +177,22 @@ The last three lines were produced by a temporary `init.groovy.d` script in a
 throw-away `JENKINS_HOME` using the same image and environment; the script and
 the throw-away home were removed afterwards.
 
+## Platform result
+
+```text
+withdraw  2.541.3-2  x86_64  -> status=4
+withdraw  2.541.3-2  aarch64 -> status=4
+submit    2.580.2-1  x86_64  -> status=0  uuid=ce623fe8-c5ab-458c-9261-12c945eff9a6
+submit    2.580.2-1  aarch64 -> status=0  uuid=4d949230-62c4-404b-a1d9-c8876faca141
+
+platform file_hash x86_64  cbe1195f170b595b49010c9180edf038f6b9d12b872fa6284269fb2e1a6650f9
+platform file_hash aarch64 99fd08aabd189afd54f66c879806c96e8fe63a3523ca7761c5b45e2899f8b2c2
+```
+
+Both platform hashes are identical to the local `sha256sum` of the submitted
+assets (V7/S12 check). The release is
+<https://github.com/Moechz/jenkins/releases/tag/v2.580.2-1>.
+
 ## Notes and residual risks
 
 - The review's vulnerability-scan PDF is not available locally; the T1
